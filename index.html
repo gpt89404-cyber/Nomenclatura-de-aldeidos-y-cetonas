@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Laboratorio 11 · Aldehídos y cetonas</title>
+<style>
+:root{--ink:#172033;--muted:#64748b;--blue:#2457d6;--line:#dbe4f0}*{box-sizing:border-box}body{margin:0;padding:18px;background:linear-gradient(140deg,#e7f2ff,#f6f4ff);font-family:system-ui,sans-serif;color:var(--ink)}main{max-width:1000px;margin:auto}.hero{background:linear-gradient(120deg,#172554,#1d4ed8 65%,#0891b2);color:white;border-radius:24px;padding:26px}.eyebrow{font-size:.78rem;letter-spacing:.12em;font-weight:800;color:#bae6fd}.hero h1{font-size:clamp(1.8rem,5vw,2.7rem);margin:8px 0}.hero p{color:#dbeafe;line-height:1.5;margin:0}.layout{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(250px,.8fr);gap:16px;margin-top:16px}.card{background:white;border:1px solid #e5eaf2;border-radius:18px;padding:20px;box-shadow:0 8px 24px #1e3a8a0c;margin-bottom:16px}.card h2{font-size:1.2rem;margin:0 0 12px}.muted{color:var(--muted)}.small{font-size:.88rem}.theory{line-height:1.55}.theory h3{font-size:1rem;margin:17px 0 6px;color:#1e40af}.theory p{margin:6px 0}.pill{display:inline-block;background:#eff6ff;color:#1d4ed8;padding:4px 9px;border-radius:20px;font-size:.78rem;font-weight:750}.formula{font-family:ui-monospace,Consolas,monospace;background:#f1f5f9;padding:2px 6px;border-radius:5px}.note{background:#f0f9ff;border-left:4px solid #0891b2;padding:10px 12px;border-radius:8px;margin:10px 0}input{width:100%;border:2px solid var(--line);border-radius:11px;padding:12px 13px;font-size:1rem;margin:7px 0 12px}input:focus{outline:3px solid #bfdbfe;border-color:#60a5fa}button{cursor:pointer;font:inherit}.primary{background:var(--blue);border:0;color:white;font-weight:750;border-radius:11px;padding:12px 17px}.primary:hover{background:#1d4ed8}.secondary{background:white;border:1px solid #cbd5e1;border-radius:11px;padding:10px 14px;font-weight:650}.hintbtn{background:#fffbeb;color:#92400e;border:1px solid #fde68a;border-radius:10px;padding:9px 12px;font-weight:700}.row{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.hidden{display:none!important}.progress{height:9px;background:#e2e8f0;border-radius:20px;overflow:hidden;margin:13px 0}.bar{height:100%;width:0;background:linear-gradient(90deg,#2563eb,#06b6d4);transition:width .2s}.qtitle{font-size:1.18rem;font-weight:800;line-height:1.5;margin:12px 0}.feedback{padding:12px 14px;border-radius:11px;margin-top:13px;line-height:1.45}.good{background:#f0fdf4;color:#166534}.bad{background:#fef2f2;color:#991b1b}.hintbox{background:#fffbeb;color:#854d0e;border:1px solid #fde68a;border-radius:10px;padding:11px;margin-top:10px}.scorebig{font-size:1.8rem;font-weight:850;color:#1d4ed8}.boarditem{display:flex;justify-content:space-between;gap:8px;padding:9px 0;border-bottom:1px solid #edf1f6}.player{font-weight:700;overflow-wrap:anywhere}.pts{font-weight:800;color:#1d4ed8;white-space:nowrap}.tablehead{font-size:.76rem;color:#64748b;text-transform:uppercase}.actionrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.visual{margin:12px 0;padding:14px;background:#f8fbff;border:1px solid #dbeafe;border-radius:14px}.visual svg{display:block;width:100%;max-width:440px;height:auto;margin:auto}.visual-caption{text-align:center;color:#475569;font-size:.82rem;margin-top:7px}.retry-note{font-size:.88rem;color:#475569;margin-top:8px}.footer{text-align:center;color:#64748b;font-size:.8rem;padding:18px}
+@media(max-width:760px){.layout{grid-template-columns:1fr}.hero{padding:22px}.card{padding:17px}}@media print{body{background:white}.primary,.secondary,.hintbtn{display:none!important}.layout{display:block}.card{box-shadow:none}}
+</style></head><body><main>
+<header class="hero"><div class="eyebrow">LABORATORIO DE QUÍMICA · GRADO 11.º</div><h1>🧪 Aldehídos y cetonas</h1><p>Practica los ejercicios del taller de la página 2. Escribe tus respuestas, pide pistas y consulta el tablero de resultados.</p></header>
+<div class="layout"><div>
+<section class="card" id="startCard"><span class="pill">Prueba escrita · 33 ejercicios</span><h2 style="margin-top:12px">Comienza tu prueba</h2><p class="muted">Las preguntas aparecen en orden aleatorio. Se aceptan variantes correctas de nomenclatura IUPAC y común, y fórmulas semidesarrolladas equivalentes. Si fallas, puedes volver a intentarlo sin avanzar.</p><label for="playerName"><strong>Nombre del estudiante</strong></label><input id="playerName" maxlength="32" placeholder="Escribe tu nombre"><div class="note small">Cada ejercicio vale 10 puntos. La calificación es estricta: debes responder correctamente para avanzar. Puedes reintentar; usar una pista resta 2 puntos. El tablero guarda los resultados en este navegador.</div><button class="primary" onclick="begin()">Iniciar prueba →</button></section>
+<section class="card hidden" id="quizCard"><div class="row"><span class="pill" id="sectionLabel">Ejercicio</span><strong id="counter">1 / 33</strong></div><div class="progress"><div class="bar" id="progressBar"></div></div><div class="small muted" id="exerciseRef"></div><div class="qtitle" id="prompt"></div><div class="visual hidden" id="visualPanel"><div id="visualSvg"></div><div class="visual-caption" id="visualCaption"></div></div><div class="small muted" id="answerInstruction"></div><div class="small muted" id="attemptCounter" style="margin:6px 0 2px;font-weight:700">Intentos restantes: 2</div><input id="answer" autocomplete="off" placeholder="Escribe tu respuesta aquí"><div class="row"><button class="hintbtn" id="hintBtn" onclick="showHint()">💡 Ver pista (−2 puntos)</button><button class="primary" id="checkBtn" onclick="checkAnswer()">Comprobar</button></div><div id="hintBox" class="hintbox hidden"></div><div id="feedback" aria-live="polite"></div><div class="actionrow"><button class="primary hidden" id="nextBtn" onclick="next()">Siguiente ejercicio →</button></div></section>
+<section class="card hidden" id="resultCard"><span class="pill">Prueba finalizada</span><h2 style="margin-top:12px">Resultado de <span id="doneName"></span></h2><div class="scorebig" id="finalPoints"></div><p id="finalMessage" class="muted"></p><p id="finalDetails"></p><div class="actionrow"><button class="primary" onclick="newAttempt()">Realizar otra prueba</button><button class="secondary" onclick="window.print()">Imprimir resultado</button></div></section>
+<section class="card theory"><h2>📘 Teoría de repaso</h2>
+<h3>1. Nomenclatura IUPAC de aldehídos</h3><p>Se selecciona la cadena más larga que contiene el grupo carbonilo del aldehído <span class="formula">–CHO</span>. Se cambia la terminación del alcano por <strong>–al</strong>. El carbono del grupo –CHO es el número 1 y los sustituyentes se indican con sus posiciones.</p><p><strong>Ejemplo de repaso (no es respuesta de la prueba):</strong> <span class="formula">CH₃–(CH₂)₄–CHO</span> → <strong>hexanal</strong>.</p>
+<h3>2. Nombre común de aldehídos</h3><p>Según el taller, el nombre común se deriva del ácido carboxílico correspondiente: se reemplaza la terminación <strong>–oico</strong> por <strong>aldehído</strong> y se elimina la palabra “ácido”. También se usan nombres tradicionales como benzaldehído y salicilaldehído.</p>
+<h3>3. Nomenclatura IUPAC de cetonas</h3><p>Se elige la cadena más larga que contiene el grupo carbonilo. Se numera para que el carbonilo tenga el número más bajo posible y se cambia la terminación del alcano por <strong>–ona</strong>. Los sustituyentes se indican con sus localizadores.</p><p><strong>Ejemplo de repaso (no es respuesta de la prueba):</strong> <span class="formula">CH₃–CH₂–CO–CH₂–CH₂–CH₂–CH₃</span> → <strong>heptan-3-ona</strong>.</p>
+<h3>4. Nombre común de cetonas</h3><p>Se nombran los dos radicales unidos al carbono del grupo carbonilo y se agrega la palabra <strong>cetona</strong>. Si los radicales son iguales, se usa el prefijo <strong>di-</strong>. Si son diferentes, se nombran en orden de complejidad, como explica el taller.</p><div class="note"><strong>Nombres especiales mencionados en el taller:</strong> propanona = acetona; difenilcetona = benzofenona; metil-fenil-cetona = acetofenona.</div><p class="small muted">Teoría y ejercicios basados en la página 2 del PDF. Los ejemplos de repaso no son respuestas válidas de la prueba.</p></section>
+</div><aside>
+<section class="card"><div class="row"><h2>🏆 Tablero de puntajes</h2><span class="pill">En vivo</span></div><p class="small muted">Mejores resultados guardados en este navegador. Se actualiza al terminar cada prueba y entre pestañas del mismo navegador.</p><div class="row tablehead"><span>Estudiante</span><span>Puntos</span></div><div id="leaderboard"><p class="muted small">Todavía no hay resultados.</p></div><div class="actionrow"><button class="secondary" onclick="exportBoard()">Exportar CSV</button><button class="secondary" onclick="clearBoard()">Borrar tablero</button></div><p class="small muted" style="margin-top:12px">Para compartir un tablero entre distintos dispositivos se necesita publicar la web con una base de datos en línea. Esta versión guarda los puntajes localmente.</p></section>
+<section class="card"><h2>📌 Cómo se califica</h2><div class="boarditem"><span>Respuesta correcta</span><strong>+10</strong></div><div class="boarditem"><span>Uso de pista</span><strong>−2</strong></div><div class="boarditem"><span>Respuesta incorrecta</span><strong>0</strong></div><div class="boarditem"><span>Máximo posible</span><strong>330</strong></div></section>
+</aside></div><footer class="footer">Actividad de práctica · Aldehídos y cetonas · Grado 11.º</footer></main>
+<script>
+const BANK=[
+["1a · Aldehído IUPAC","Escribe el nombre IUPAC de CH₃–CH₂–CHO.","Cuenta los carbonos incluyendo el carbono del grupo –CHO. La cadena tiene tres carbonos.",["propanal","propionaldehido","aldehido propionico"],"nombre"],
+["1b · Aldehído IUPAC","Escribe el nombre IUPAC de CH₃–CH₂–CH₂–CHO.","La cadena principal tiene cuatro carbonos y termina en –CHO.",["butanal","butiraldehido","aldehido butirico"],"nombre"],
+["1c · Aldehído IUPAC","Escribe el nombre IUPAC de CH₃–CH(Cl)–CHO.","El carbono del –CHO es C1. El cloro queda en el carbono 2.",["2-cloropropanal","alfa-cloropropionaldehido"],"nombre"],
+["1d · Aldehído IUPAC","Escribe el nombre IUPAC de CH₃–CH(CH₂CH₃)–CH₂–CH₂–CH₂–CHO.","Elige la cadena más larga que incluya –CHO: puedes continuar por la rama etilo. Numera desde el –CHO.",["5-metilheptanal"],"nombre"],
+["1e · Construcción de aldehído","Escribe la fórmula semidesarrollada del 2-clorobutanal.","Butanal tiene cuatro carbonos. El carbono 1 es –CHO y el cloro está en el carbono 2.",["ch3ch2chclcho","ch3-ch2-chcl-cho","cho-chcl-ch2-ch3"],"formula"],
+["1f · Construcción de aldehído","Escribe una fórmula semidesarrollada del 3-hidroxi-2-metil-2-pentenal.","Empieza por –CHO como C1; hay doble enlace entre C2 y C3, un metilo en C2 y un –OH en C3.",["ch3-ch2-c(oh)=c(ch3)-cho","cho-c(ch3)=c(oh)-ch2-ch3","ch3ch2c(oh)=c(ch3)cho"],"formula"],
+["1g · Construcción de aldehído","Escribe la fórmula semidesarrollada del 2-propenal.","Tiene tres carbonos; el aldehído ocupa C1 y hay un doble enlace entre C2 y C3.",["ch2=ch-cho","cho-ch=ch2"],"formula"],
+["2a · Nombre común de aldehído","Escribe el nombre común del aldehído CH₃–CH(CH₃)–CHO.","Es el nombre tradicional del aldehído de cuatro carbonos con ramificación en el carbono alfa.",["isobutiraldehido","2-metilpropanal","2-metilpropan-1-al"],"nombre"],
+["2b · Nombre común de aldehído","Escribe el nombre común del anillo bencénico con un grupo CH₃ y un grupo –CHO en posición para (opuestos).","El nombre tradicional se forma a partir de tolueno y aldehído; usa el prefijo para-.",["p-tolualdehido","para-tolualdehido","4-metilbenzaldehido","4-metilbenzenocarbaldehido"],"nombre"],
+["2c · Nombre común de aldehído","Escribe el nombre común de C₆H₅–CHO.","Es el nombre tradicional del aldehído aromático derivado del benceno.",["benzaldehido","benzenocarbaldehido"],"nombre"],
+["2d · Nombre común de aldehído","Escribe el nombre común de CH₃–CH₂–CH(CH₃)–CHO.","Es un aldehído de cinco carbonos; el sustituyente metilo está en el carbono alfa.",["alfa-metilbutiraldehido","α-metilbutiraldehido","2-metilbutiraldehido","2-metilbutanal"],"nombre"],
+["2e · Nombre común de aldehído","Escribe el nombre común de CH₃–CH(CH₃)–CH₂–CH(Cl)–CHO.","Toma valeraldehído como nombre base; el cloro está en alfa y el metilo en gamma.",["alfa-cloro-gamma-metilvaleraldehido","α-cloro-γ-metilvaleraldehido"],"nombre"],
+["2f · Nombre común de aldehído","Escribe el nombre común de un anillo bencénico con –CHO y –OH en carbonos vecinos (orto).","Es el nombre tradicional del aldehído aromático conocido también como 2-hidroxibenzaldehído.",["salicilaldehido","2-hidroxibenzaldehido","2-hidroxibenzenocarbaldehido"],"nombre"],
+["3a · Cetona IUPAC","Escribe el nombre IUPAC de CH₃–CO–CH₃.","La cadena tiene tres carbonos; el carbonilo está en el carbono 2.",["propanona","propan-2-ona","2-propanona","acetona","dimetilcetona"],"nombre"],
+["3b · Cetona IUPAC","Escribe el nombre IUPAC de CH₃–CO–CH₂–CH₃.","La cadena tiene cuatro carbonos y el carbonilo debe recibir el número más bajo.",["2-butanona","butan-2-ona","metiletilcetona","etilmetilcetona"],"nombre"],
+["3c · Cetona IUPAC","Escribe el nombre IUPAC de CH₃–CH(Cl)–CO–CH₃.","Numera desde el extremo más cercano al carbonilo; el cloro queda en C3.",["3-cloro-2-butanona","3-clorobutan-2-ona"],"nombre"],
+["3d · Cetona IUPAC","Escribe el nombre IUPAC de CH₃–CH(CH₂CH₃)–CH₂–CO–CH₃.","Busca la cadena más larga que incluya el carbonilo. Numera desde el extremo más cercano al C=O.",["4-metil-2-hexanona","4-metilhexan-2-ona"],"nombre"],
+["3e · Cetona IUPAC","Escribe el nombre IUPAC de CH₃–CH(CH₃)–CO–CH(Cl)–CH₂–CH₃.","La cadena tiene seis carbonos; el carbonilo queda en C3. Escoge la numeración que dé los menores números a los sustituyentes.",["4-cloro-2-metil-3-hexanona","4-cloro-2-metilhexan-3-ona"],"nombre"],
+["3f · Cetona IUPAC","Escribe el nombre IUPAC de CH₃–CO–CH(CH₃)–CH₃.","La cadena principal tiene cuatro carbonos; el carbonilo recibe C2 y hay un metilo en C3.",["3-metil-2-butanona","3-metilbutan-2-ona"],"nombre"],
+["3g · Construcción de cetona","Escribe la fórmula semidesarrollada de la 3-pentanona.","Tiene cinco carbonos y el grupo C=O está en el carbono 3.",["ch3ch2coch2ch3","ch3-ch2-co-ch2-ch3"],"formula"],
+["3h · Construcción de cetona","Escribe la fórmula semidesarrollada de la 3-metil-2-pentanona.","La cadena principal tiene cinco carbonos; C=O en C2 y un metilo en C3.",["ch3coch(ch3)ch2ch3","ch3-co-ch(ch3)-ch2-ch3"],"formula"],
+["3i · Construcción de cetona","Escribe la fórmula semidesarrollada de la 2,4-pentanodiona.","Tiene cinco carbonos y dos grupos carbonilo en las posiciones 2 y 4.",["ch3coch2coch3","ch3-co-ch2-co-ch3"],"formula"],
+["3j · Construcción de cetona","Escribe la fórmula semidesarrollada de la 2,5-dimetil-4-hexen-3-ona.","La cadena principal tiene seis carbonos; C=O en C3, doble enlace C4=C5 y metilos en C2 y C5.",["ch3-ch(ch3)-co-ch=c(ch3)-ch3","ch3ch(ch3)coch=c(ch3)ch3"],"formula"],
+["4a · Nombre común de cetona","Escribe el nombre común de CH₃–CH₂–CO–CH₂–CH₃.","Los dos radicales unidos al carbonilo son iguales y ambos son etilo.",["dietilcetona","dietil cetona"],"nombre"],
+["4b · Nombre común de cetona","Escribe el nombre común de C₆H₅–CO–C₆H₅.","Es una cetona con dos radicales fenilo; también se conoce como benzofenona.",["difenilcetona","difenil cetona","benzofenona"],"nombre"],
+["4c · Nombre común de cetona","Escribe el nombre común de C₆H₅–CO–CH₂–CH₃.","Los radicales son fenil y etil. Nómbralos y agrega cetona.",["etilfenilcetona","etil fenil cetona","feniletilcetona","fenil etil cetona","propiofenona","1-fenilpropan-1-ona"],"nombre"],
+["4d · Nombre común de cetona","Escribe el nombre común de CH₃–CH₂–CO–CH₂–CH₂–CH₃.","Los radicales son etil y propil.",["etilpropilcetona","etil propil cetona","propiletilcetona","propil etil cetona"],"nombre"],
+["4e · Nombre común de cetona","Escribe el nombre común de (CH₃)₂CH–CO–CH₂–CH(CH₃)₂.","Identifica los dos radicales: isopropil e isobutil.",["isopropilisobutilcetona","isopropil isobutil cetona","isobutilisopropilcetona"],"nombre"],
+["4f · Nombre común de cetona","Escribe el nombre común de (CH₃)₂CH–CO–CH₂–CH₃.","Los radicales unidos al carbonilo son isopropil y etil.",["etilisopropilcetona","etil isopropil cetona","isopropiletilcetona"],"nombre"],
+["4g · Construcción de cetona","Escribe la fórmula semidesarrollada de la metil-isopentil-cetona.","Une un grupo metilo y un grupo isopentilo (–CH₂–CH₂–CH(CH₃)₂) al carbonilo.",["ch3coch2ch2ch(ch3)2","ch3-co-ch2-ch2-ch(ch3)-ch3"],"formula"],
+["4h · Construcción de cetona","Escribe la fórmula semidesarrollada de la etil-bencil-cetona.","El grupo bencilo es C₆H₅–CH₂–. Únelo al carbonilo y al grupo etilo.",["c6h5ch2coch2ch3","c6h5-ch2-co-ch2-ch3","phch2coch2ch3"],"formula"],
+["4i · Construcción de cetona","Escribe la fórmula semidesarrollada de la di-isobutil-cetona.","Coloca dos radicales isobutil alrededor del carbonilo: (CH₃)₂CH–CH₂–.",["(ch3)2chch2coch2ch(ch3)2","(ch3)2ch-ch2-co-ch2-ch(ch3)2"],"formula"],
+["4j · Construcción de cetona","Escribe la fórmula semidesarrollada de la etil-isobutil-cetona.","Une un grupo etilo (CH₃–CH₂–) y un isobutil (–CH₂–CH(CH₃)₂) al carbonilo.",["ch3ch2coch2ch(ch3)2","ch3-ch2-co-ch2-ch(ch3)-ch3"],"formula"]
+].map(x=>({ref:x[0],prompt:x[1],hint:x[2],answers:x[3],kind:x[4]}));
+let queue=[],pos=0,points=0,usedHint=false,student="",attemptsUsed=0;
+const $=id=>document.getElementById(id);
+function shuffle(a){let b=[...a];for(let i=b.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
+function norm(s){return s.toLowerCase().normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').replace(/α/g,'alfa').replace(/γ/g,'gamma').replace(/[–—−]/g,'-').replace(/\\s+/g,'').replace(/[·,;]/g,'').replace(/−/g,'-');}
+function formulaNorm(s){
+ return norm(s)
+  .replace(/h3c/g,'ch3')
+  .replace(/h2c/g,'ch2')
+  .replace(/h c/g,'ch')
+  .replace(/[(){}\\[\\]]/g,'')
+  .replace(/-/g,'').replace(/·/g,'').replace(/→/g,'');
+}
+function accepted(q,raw){
+ const v=norm(raw);
+ if(q.answers.some(a=>norm(a)===v)) return true;
+ if(q.kind==='formula'){
+   const f=formulaNorm(raw);
+   return q.answers.some(a=>{const x=formulaNorm(a);return x===f || x.split('').reverse().join('')===f;});
+ }
+ // Admite variantes de escritura habituales, sin relajar la estructura ni los localizadores.
+ const compact=v.replace(/-/g,'');
+ return q.answers.some(a=>norm(a).replace(/-/g,'')===compact);
+}
+function drawVisual(q){
+ const panel=$('visualPanel'),svg=$('visualSvg'),cap=$('visualCaption');
+ const t=q.prompt.toLowerCase();
+ let graphic='';
+ if(/anillo|benc|fenil|benz|salicil|tolualdehido/.test(t)){
+  graphic=`<svg viewBox="0 0 360 150" role="img" aria-label="Anillo aromático con dobles enlaces alternados"><polygon points="180,18 244,55 244,105 180,142 116,105 116,55" fill="none" stroke="#334155" stroke-width="3"/><circle cx="180" cy="80" r="35" fill="none" stroke="#2563eb" stroke-width="3"/><text x="180" y="10" text-anchor="middle" font-size="13" fill="#0f172a">Anillo bencénico</text><text x="260" y="60" font-size="15" fill="#0f172a">–CHO / –CO–</text><path d="M244 80 L260 80" stroke="#0f172a" stroke-width="2"/></svg>`;
+  cap.textContent='Representación esquemática del anillo aromático; identifica las posiciones de los sustituyentes.';
+ }else if(/doble enlace|penten|hexen|propen|alqueno/.test(t)){
+  graphic=`<svg viewBox="0 0 360 115" role="img" aria-label="Enlace doble entre dos carbonos"><text x="180" y="30" text-anchor="middle" font-size="13" fill="#475569">Enlace doble C=C</text><text x="78" y="76" font-size="25" fill="#0f172a">C</text><text x="266" y="76" font-size="25" fill="#0f172a">C</text><path d="M105 58 L252 58 M105 69 L252 69" stroke="#2563eb" stroke-width="3"/><text x="180" y="100" text-anchor="middle" font-size="12" fill="#475569">Dos pares de electrones compartidos</text></svg>`;
+  cap.textContent='Esquema del enlace doble. Recuerda indicar su posición en la cadena.';
+ }else{
+  graphic=`<svg viewBox="0 0 360 115" role="img" aria-label="Grupo carbonilo C doble enlace O"><text x="180" y="22" text-anchor="middle" font-size="13" fill="#475569">Grupo funcional carbonilo</text><text x="112" y="78" font-size="27" fill="#0f172a">C</text><text x="232" y="78" font-size="27" fill="#0f172a">O</text><path d="M143 55 L220 55 M143 68 L220 68" stroke="#2563eb" stroke-width="3"/><text x="180" y="104" text-anchor="middle" font-size="12" fill="#475569">C=O · aldehído: –CHO · cetona: –CO–</text></svg>`;
+  cap.textContent='El carbonilo es C=O. En aldehídos está al extremo (–CHO); en cetonas queda entre dos radicales (–CO–).';
+ }
+ svg.innerHTML=graphic;panel.classList.remove('hidden');
+}
+function begin(){student=$('playerName').value.trim();if(!student){$('playerName').focus();return;}queue=shuffle(BANK);pos=0;points=0;$('startCard').classList.add('hidden');$('resultCard').classList.add('hidden');$('quizCard').classList.remove('hidden');render();}
+function render(){let q=queue[pos];usedHint=false;attemptsUsed=0;$('attemptCounter').textContent='Intentos restantes: 2';$('sectionLabel').textContent=q.ref.split(' · ')[0];$('counter').textContent=`${pos+1} / ${queue.length}`;$('progressBar').style.width=`${pos/queue.length*100}%`;$('exerciseRef').textContent=q.ref;$('prompt').textContent=q.prompt;drawVisual(q);$('answerInstruction').textContent=q.kind==='formula'?'Escribe la fórmula semidesarrollada.':'Escribe el nombre del compuesto.';$('answer').value='';$('answer').disabled=false;$('checkBtn').classList.remove('hidden');$('checkBtn').disabled=false;$('hintBtn').disabled=false;$('hintBox').classList.add('hidden');$('hintBox').textContent='';$('feedback').className='';$('feedback').textContent='';$('nextBtn').classList.add('hidden');$('answer').focus();}
+function showHint(){if(usedHint)return;usedHint=true;$('hintBox').textContent=queue[pos].hint;$('hintBox').classList.remove('hidden');$('hintBtn').disabled=true;}
+function checkAnswer(){
+ let raw=$('answer').value.trim();if(!raw){$('answer').focus();return;}
+ let q=queue[pos],correct=accepted(q,raw);
+ if(correct){
+   let earned=usedHint?8:10;points+=earned;
+   $('answer').disabled=true;$('checkBtn').classList.add('hidden');$('hintBtn').disabled=true;
+   $('attemptCounter').textContent=`Intentos utilizados: ${attemptsUsed+1} de 2`;
+   $('feedback').className='feedback good';
+   $('feedback').textContent=`¡Correcto! +${earned} puntos. Se acepta tu respuesta como una forma válida.${usedHint?' Se aplicó la reducción por pista.':''}`;
+   $('nextBtn').classList.remove('hidden');$('nextBtn').textContent=pos===queue.length-1?'Ver resultado final':'Siguiente ejercicio →';
+ }else{
+   attemptsUsed++;
+   const remaining=2-attemptsUsed;
+   $('attemptCounter').textContent=remaining>0?`Intentos restantes: ${remaining}`:'Intentos utilizados: 2 de 2';
+   $('feedback').className='feedback bad';
+   if(remaining>0){
+     $('feedback').textContent='Respuesta incorrecta. Te queda un intento. Revisa la estructura, los enlaces y la posición de los grupos funcionales; puedes corregirla y volver a comprobar.';
+     $('answer').focus();$('answer').select();
+   }else{
+     $('answer').disabled=true;$('checkBtn').classList.add('hidden');$('hintBtn').disabled=true;
+     $('feedback').textContent=`Se agotaron los 2 intentos. Una respuesta aceptada es: ${q.answers[0]}. No se suman puntos en este ejercicio.`;
+     $('nextBtn').classList.remove('hidden');$('nextBtn').textContent=pos===queue.length-1?'Ver resultado final':'Siguiente ejercicio →';
+   }
+ }
+}
+function next(){pos++;if(pos<queue.length)render();else finish();}
+function finish(){$('quizCard').classList.add('hidden');$('resultCard').classList.remove('hidden');$('doneName').textContent=student;$('finalPoints').textContent=`${points} / 330 puntos`;let correct=document.querySelectorAll('.unused').length;let pct=points/330;$('finalMessage').textContent=pct>=.9?'¡Excelente dominio del taller!':pct>=.7?'¡Buen trabajo! Repasa los ejercicios que te costaron.':pct>=.5?'Vas avanzando. Repasa las reglas y vuelve a intentarlo.':'Sigue practicando: revisa la teoría y vuelve a realizar la prueba.';$('finalDetails').textContent='Puntaje registrado en el tablero. La puntuación máxima es 330.';let b=readBoard();b.push({name:student,points,date:new Date().toLocaleString('es-CO')});b.sort((a,b)=>b.points-a.points);writeBoard(b.slice(0,50));renderBoard();}
+function readBoard(){try{return JSON.parse(localStorage.getItem('aldehidosCetonasBoard')||'[]')}catch(e){return[]}}
+function writeBoard(b){localStorage.setItem('aldehidosCetonasBoard',JSON.stringify(b));}
+function renderBoard(){let b=readBoard(),el=$('leaderboard');el.innerHTML='';if(!b.length){el.innerHTML='<p class="muted small">Todavía no hay resultados.</p>';return;}b.slice(0,15).forEach((r,i)=>{let d=document.createElement('div');d.className='boarditem';let left=document.createElement('span');left.innerHTML=`<span style="color:#64748b">${i+1}.</span> <span class="player"></span>`;left.querySelector('.player').textContent=r.name;let right=document.createElement('span');right.className='pts';right.textContent=`${r.points} pts`;d.append(left,right);d.title=r.date||'';el.appendChild(d);});}
+function newAttempt(){$('resultCard').classList.add('hidden');$('startCard').classList.remove('hidden');$('playerName').value=student;$('playerName').focus();}
+function exportBoard(){let b=readBoard();if(!b.length)return;let rows=[['Estudiante','Puntos','Fecha'],...b.map(x=>[x.name,x.points,x.date])];let csv=rows.map(row=>row.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\n');let blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8;'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='puntajes_aldehidos_cetonas.csv';a.click();URL.revokeObjectURL(url);}
+function clearBoard(){if(confirm('¿Borrar todos los puntajes guardados en este navegador?')){localStorage.removeItem('aldehidosCetonasBoard');renderBoard();}}
+window.addEventListener('storage',e=>{if(e.key==='aldehidosCetonasBoard')renderBoard();});renderBoard();
+</script></body></html>
